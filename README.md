@@ -17,10 +17,13 @@
 ```ssh-keygen -t rsa -b 4096```
 
 5. Run Terraform to create the instances
-```terraform init && terraform apply```
+```cd edgenativeworkshop && terraform init && terraform apply```
 
 6. Once the instances are created, use Terraform output to generate an ansible inventory file
 ```terraform output ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' >> ansible.inv```
 
-7. Use the included Ansible playbook to setup and start the NATS.io cluster
+7. Run the included script to generate a nats config file based on the IP addresses of the hosts
+```./edgenativeworkshop/nats_config.sh```
+
+8. Use the included Ansible playbook to setup and start the NATS.io cluster
 ```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml```
