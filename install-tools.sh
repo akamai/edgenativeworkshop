@@ -3,8 +3,6 @@
 # Update package lists
 sudo apt-get update
 
-# Install Git
-sudo apt-get install -y git
 
 # Install Terraform
 sudo apt-get install -y gnupg software-properties-common curl
@@ -13,7 +11,7 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update && sudo apt-get install -y terraform
 
 # Install Linode CLI
-curl -s https://raw.githubusercontent.com/linode/linode-cli/master/linode-cli.sh | bash
+pip3 install linode-cli --upgrade
 
 # Install Ansible
 sudo apt-get update
