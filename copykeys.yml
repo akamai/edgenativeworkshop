@@ -13,4 +13,4 @@
         src: privkey.pem  # Local path to new_nats.conf
         dest: /etc/privkey.pem 
     - name: set database directory and permissions
-      command: mkdir /tmp/db && chmod 777 /tmp/db
+      command: chmod 777 /tmp/db
