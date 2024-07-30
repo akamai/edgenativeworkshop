@@ -1,0 +1,38 @@
+---
+- name: Start Docker container
+  hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: Start Docker container
+      docker_container:
+        name: nats-http
+        image: brianapley/nats-http
+        pull: true
+        state: started
+        recreate: true
+        interactive: yes
+        etc_hosts:
+          nats.connected-cloud.io: 172.17.0.1
+        tty: yes
+        ports:
+          - "443:443"
+        volumes:
+          - "may30b:/data"
+          - "/etc:/certs"
+          - "/tmp/db:/db"
+    - name: start node.js
+      docker_container:
+        name: node-http
+        image: brianapley/node-http
+        pull: true
+        state: started
+        recreate: true
+        interactive: yes
+        tty: yes
+        ports:
+          - "8443:8443"
+        volumes:
+          - "/etc:/etc"
+          - "/tmp/db:/tmp/db"
