@@ -1,0 +1,16 @@
+---
+- name: Copy keys and set permissions
+  hosts: all
+  become: true  # Run tasks with root privileges
+  gather_facts: no
+  tasks:
+    - name: Copy pubkey
+      copy:
+        src: fullchain.pem  # Local path to new_nats.conf
+        dest: /etc/fullchain.pem 
+    - name: copy priv key 
+      copy:
+        src: privkey.pem  # Local path to new_nats.conf
+        dest: /etc/privkey.pem 
+    - name: set database directory and permissions
+      command: mkdir /tmp/db && chmod 777 /tmp/db

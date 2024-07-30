@@ -1,0 +1,24 @@
+---
+- name: Start Docker container
+  hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: Start Docker container
+      docker_container:
+        name: edgenative
+        image: brianapley/edgenative
+        pull: true
+        state: started
+        recreate: true
+        interactive: yes
+        etc_hosts:
+          nats.connected-cloud.io: 172.17.0.1
+        tty: yes
+        ports:
+          - "443:443"
+        volumes:
+          - "july30:/data"
+          - "/etc:/certs"
+          - "/tmp/db:/db"
