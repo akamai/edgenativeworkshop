@@ -19,7 +19,7 @@ variable "linode_token" {
 variable "ssh_public_key" {
   description = "Path to the SSH public key file"
   type        = string
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "/root/.ssh/id_rsa.pub"
 }
 
 variable "regions" {
