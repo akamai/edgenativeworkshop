@@ -27,3 +27,7 @@
 
 8. Use the included Ansible playbook to setup and start the NATS.io cluster
 ```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml```
+
+9. Install node - "apt update && apt install nodejs npm"
+
+    
