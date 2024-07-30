@@ -16,10 +16,10 @@ variable "linode_token" {
   sensitive   = true
 }
 
-variable "root_password" {
-  description = "Root password for the Linodes"
+variable "ssh_public_key" {
+  description = "Path to the SSH public key file"
   type        = string
-  sensitive   = true
+  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "regions" {
@@ -32,13 +32,17 @@ locals {
   timestamp = formatdate("s", timestamp())
 }
 
+data "local_file" "ssh_key" {
+  filename = var.ssh_public_key
+}
+
 resource "linode_instance" "linode" {
   count       = length(var.regions)
   label       = "workshop-${element(var.regions, count.index)}-${local.timestamp}"
   region      = element(var.regions, count.index)
   type        = "g6-standard-1"
   image       = "linode/ubuntu24.04"
-  root_pass   = var.root_password
+  ssh_keys    = [data.local_file.ssh_key.content]
 }
 
 output "linode_labels" {
