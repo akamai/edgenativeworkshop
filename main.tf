@@ -42,7 +42,7 @@ resource "linode_instance" "linode" {
   region      = element(var.regions, count.index)
   type        = "g6-standard-1"
   image       = "linode/ubuntu24.04"
-  ssh_keys    = [data.local_file.ssh_key.content]
+  authorized_keys = [data.local_file.ssh_key.content]
 }
 
 output "linode_labels" {
