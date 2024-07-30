@@ -20,7 +20,7 @@
 ```cd edgenativeworkshop && terraform init && terraform apply```
 
 6. Once the instances are created, use Terraform output to generate an ansible inventory file
-```terraform output ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' >> ansible.inv```
+```terraform output ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' > ansible.inv```
 
 7. Run the included script to generate a nats config file based on the IP addresses of the hosts
 ```./edgenativeworkshop/nats_config.sh```
@@ -28,6 +28,6 @@
 8. Use the included Ansible playbook to setup and start the NATS.io cluster
 ```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml```
 
-9. Install node - "apt update && apt install nodejs npm"
+9. Use the docker Ansible playbook to install Docker on the cluster nodes
+``````export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv docker.yml```
 
-10. install required modules "npm install express nats"
