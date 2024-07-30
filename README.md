@@ -29,5 +29,12 @@
 ```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml```
 
 9. Use the docker Ansible playbook to install Docker on the cluster nodes
-``````export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv docker.yml```
+```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv docker.yml```
+
+10. Copy the keys to the cluster nodes
+```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv copykeys.yml```
+
+11. Start the app layer in docker
+```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv start-app.yml```
+
 
