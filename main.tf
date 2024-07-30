@@ -44,3 +44,7 @@ resource "linode_instance" "linode" {
 output "linode_labels" {
   value = [for linode in linode_instance.linode : linode.label]
 }
+
+output "ip_address" {
+  value = [for vm in linode_instance.linode : "${vm.ipv4}"]
+}
