@@ -7,7 +7,7 @@
   tasks:
     - name: Start Docker container
       docker_container:
-        name: brianapley/edgenative
+        name: edgenative
         image: brianapley/edgenative
         pull: true
         state: started
