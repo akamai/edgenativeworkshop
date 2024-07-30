@@ -7,8 +7,8 @@
   tasks:
     - name: Start Docker container
       docker_container:
-        name: nats-http
-        image: brianapley/nats-http
+        name: brianapley/edgenativeworkshop-app
+        image: brianapley/edgenativeworkshop-app
         pull: true
         state: started
         recreate: true
