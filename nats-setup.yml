@@ -3,6 +3,8 @@
   hosts: all
   become: true  # Run tasks with root privileges
   gather_facts: no
+  vars:
+    root_password: "{{ root_password }}"
   tasks:
     - name: Copy nats config
       copy:
