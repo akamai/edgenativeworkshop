@@ -10,7 +10,9 @@
       copy:
         src: new_nats.conf  # Local path to new_nats.conf
         dest: /root/nats.conf
-    - name: download nats server
-      command: "curl 'https://objects.githubusercontent.com/github-production-release-asset-2e65be/6443435/0bb7eb8e-6757-4924-91c0-c8ba59e4f5db?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20240730%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240730T025758Z&X-Amz-Expires=300&X-Amz-Signature=252825bed691249014d0c7d24cd3d842b0b6e2aae8eea174e975a6dda6ac015f&X-Amz-SignedHeaders=host&actor_id=19197357&key_id=0&repo_id=6443435&response-content-disposition=attachment%3B%20filename%3Dnats-server-v2.10.18-amd64.deb&response-content-type=application%2Foctet-stream' -o nats-server.deb"
+    - name: copy nats server
+      copy:
+        src: nats-server-v2.10.18-amd64.deb
+        dest: /root/nats-server-v2.10.18-amd64.deb
     - name: install nats server
-      command: "dpkg -i nats-server.deb"
+      command: "dpkg -i /root/nats-server-v2.10.18-amd64.deb"
