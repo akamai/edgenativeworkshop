@@ -30,4 +30,4 @@
 
 9. Install node - "apt update && apt install nodejs npm"
 
-    
+10. install required modules "npm install express nats"
