@@ -7,8 +7,8 @@
   tasks:
     - name: Start Docker container
       docker_container:
-        name: brianapley/edgenativeworkshop-app
-        image: brianapley/edgenativeworkshop-app
+        name: brianapley/edgenative
+        image: brianapley/edgenative
         pull: true
         state: started
         recreate: true
