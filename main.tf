@@ -47,7 +47,7 @@ resource "linode_instance" "linode" {
   region      = element(var.regions, count.index)
   type        = "g6-standard-1"
   image       = "linode/ubuntu24.04"
-  tags        = "workshop"
+  tags        = toset(["workshop"])
   authorized_keys = [local.sanitized_ssh_key]
 }
 
