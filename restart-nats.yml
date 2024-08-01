@@ -1,0 +1,24 @@
+---
+- name: Copy new_nats.conf to target hosts
+  hosts: all
+  become: true  # Run tasks with root privileges
+  gather_facts: no
+  vars:
+    root_password: "{{ root_password }}"
+  tasks:
+    - name: Copy nats config
+      copy:
+        src: new_nats.conf  # Local path to new_nats.conf
+        dest: /root/nats.conf
+    - name: kill nats server
+      command: "killall nats-server"
+    - name: Perform GeoIP lookup
+      community.general.ipinfoio_facts:
+      register: geoip_result
+    - name: Set node_name fact with city location
+      set_fact:
+        node_name: "{{ city }}"
+    - name: Start NATS server with IP address as name
+      command: "nats-server -c /root/nats.conf --cluster_name nats_global --name '{{ node_name }}' "
+      async: 10000000
+      poll: 0
