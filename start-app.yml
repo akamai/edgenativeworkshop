@@ -13,8 +13,8 @@
         state: started
         recreate: true
         interactive: yes
-        add_hosts:
-          host.docker.internal: host-gateway
+        etc_hosts:
+          host.docker.internal: 172.17.0.1
         tty: yes
         ports:
           - "443:443"
