@@ -61,16 +61,16 @@ ssh-keygen -t rsa -b 4096
 ```
 terraform init && terraform apply
 ```
-### User Ansible to install NATS.io and start your distributed NATS cluster
-3. Once the instances are created, use Terraform output to generate an ansible inventory file
+### Use Ansible to install NATS.io and start your distributed NATS cluster
+1. Once the instances are created, use Terraform output to generate an ansible inventory file
 ```
 terraform output ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' > ansible.inv
 ```
-4. Run the included script to generate a nats config file based on the IP addresses of the hosts
+2. Run the included script to generate a nats config file based on the IP addresses of the hosts
 ```
 ./nats_config.sh
 ```
-5. Use the included Ansible playbook to setup and start the NATS.io cluster
+3. Use the included Ansible playbook to setup and start the NATS.io cluster
 ```
 export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml
 ```
