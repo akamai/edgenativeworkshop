@@ -5,7 +5,7 @@
   gather_facts: no
 
   tasks:
-    - name: Start Docker container
+    - name: Start edge trader app
       docker_container:
         name: edgetrader
         image: brianapley/edge-trader
@@ -22,3 +22,17 @@
           - "aug13:/data"
           - "/etc:/certs"
           - "/tmp/db:/db"
+    - name: Start express server
+      docker_container:
+        name: nodehttp
+        image: brianapley/node-http
+        pull: true
+        state: started
+        recreate: true
+        interactive: yes
+        tty: yes
+        ports:
+          - "8443:8443"
+        volumes:
+          - "/etc:/etc"
+          - "/tmp/db:/tmp/db"
