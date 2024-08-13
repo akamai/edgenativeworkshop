@@ -63,7 +63,9 @@ terraform init && terraform apply
 ```
 ### Copy the certificate keypair from the filehost
 1. Run scp to copy the cert keypair files.
-```scp workshop@filehost.connected-cloud.io:fullchain.pem . && scp workshop@filehost.connected-cloud.io:privkey.pem```
+```
+scp workshop@filehost.connected-cloud.io:fullchain.pem . && scp workshop@filehost.connected-cloud.io:privkey.pem
+```
 ### Use Ansible to install NATS.io and start your distributed NATS cluster
 1. Once the instances are created, use Terraform output to generate an ansible inventory file
 ```
