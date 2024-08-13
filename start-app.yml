@@ -19,6 +19,6 @@
         ports:
           - "443:443"
         volumes:
-          - "aug12a:/data"
+          - "aug12b:/data"
           - "/etc:/certs"
           - "/tmp/db:/db"
