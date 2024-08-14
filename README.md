@@ -36,7 +36,7 @@ The first step is to create a Linode using the "Secure Your Server" Marketplace 
 
 ### Pull the repo source and install your tools
 
-1. Pull down this repository locally-
+1. Pull down this repository locally
 ```
 git init && git clone https://github.com/akamai/edgenativeworkshop
 ```
@@ -62,12 +62,12 @@ ssh-keygen -t rsa -b 4096
 terraform init && terraform apply
 ```
 ### Copy the certificate keypair from the filehost
-1. Run scp to copy the cert keypair files.
+1. Run scp to copy the cert keypair files
 ```
-scp workshop@filehost.connected-cloud.io:fullchain.pem
+scp workshop@filehost.connected-cloud.io:fullchain.pem .
 ```
 ```
-scp workshop@filehost.connected-cloud.io:privkey.pem
+scp workshop@filehost.connected-cloud.io:privkey.pem .
 ```
 ### Use Ansible to install NATS.io and start your distributed NATS cluster
 1. Once the instances are created, use Terraform output to generate an ansible inventory file
@@ -96,7 +96,12 @@ ansible-playbook -i ansible.inv copykeys.yml
 ```
 ansible-playbook -i ansible.inv start-app.yml
 ```
-4. Run the gtm.sh script to generate a terraform config file for Global Traffic Management
+### Generate Terraform Scripts for Akamai Global Traffic Management 
+1. Run the gtm.sh script to generate a terraform config file for Global Traffic Management
 ```
-./gtm.sh
+./gtm.sh --user={username}
+```
+2. Copy the terraform file to the filehost machine
+```
+scp {username}.tf workshop@filehost.connected-cloud.io:.
 ```
