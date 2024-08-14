@@ -10,6 +10,7 @@
         name: edgetrader
         image: brianapley/edge-trader
         pull: true
+        memory: "1024m"
         state: started
         recreate: true
         interactive: yes
