@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Ensure the script is called with a --user argument
+if [ "$#" -ne 1 ] || ! [[ $1 =~ ^--user= ]]; then
+    echo "Usage: $0 --user=username"
+    exit 1
+fi
+
+# Extract the username from the --user argument
+user="${1#--user=}"
 
 LNINPUTFILE="linodejson"
 tag="workshop"
@@ -22,13 +30,11 @@ jq -c '.[]' $LNINPUTFILE | while IFS= read -r obj; do
     region=$(echo "$obj" | jq -r '.region')
     ipv4=$(echo "$obj" | jq -r '.ipv4 | map(select(test("^(?!192\\.168)\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$"))) | join(",")')
 
-
     # Append ipv4 values to the region file
     echo "$ipv4" >> "$LNOUT${region}"
 done
 
 # Format the files in GTM friendly format 
-
 for file in $LNOUTPATH; do
         # Format the IP addresses and overwrite the file
         filename=$(basename "$file")
@@ -36,11 +42,12 @@ for file in $LNOUTPATH; do
 done
 
 # Build a GTM Property file based on entries 
+output_file="${user}.tf"
 
-cat > "property.tf" <<EOF
+cat > "$output_file" <<EOF
 resource "akamai_gtm_property" "property" {
   domain                      = akamai_gtm_domain.domain.name
-  name                        = var.property
+  name                        = "${user}"
   type                        = "performance"
   ipv6                        = false
   score_aggregation_type      = "worst"
@@ -74,12 +81,12 @@ resource "akamai_gtm_property" "property" {
   }
 
 EOF
-for f in $LNPROCPATH
-do
+
+for f in $LNPROCPATH; do
 echo "processing $f file"
 TARGETS=$(cat "$f")
 REGION=$(basename "$f")
-cat >> "property.tf" <<EOF
+cat >> "$output_file" <<EOF
   traffic_target {
     datacenter_id = akamai_gtm_datacenter.$REGION.datacenter_id
     enabled       = true
@@ -88,8 +95,5 @@ cat >> "property.tf" <<EOF
   }
 EOF
 done
-echo "}" >> property.tf
 
-
-
-
+echo "}" >> "$output_file"
