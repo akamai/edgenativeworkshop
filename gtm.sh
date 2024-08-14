@@ -45,7 +45,7 @@ done
 output_file="${user}.tf"
 
 cat > "$output_file" <<EOF
-resource "akamai_gtm_property" "property" {
+resource "akamai_gtm_property" "${user}" {
   domain                      = akamai_gtm_domain.domain.name
   name                        = "${user}"
   type                        = "performance"
