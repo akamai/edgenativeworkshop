@@ -97,7 +97,7 @@ ansible-playbook -i ansible.inv copykeys.yml
 ansible-playbook -i ansible.inv start-app.yml
 ```
 ### Generate Terraform Scripts for Akamai Global Traffic Management 
-1. Run the gtm.sh script to generate a terraform config file for Global Traffic Management
+1. Run the gtm.sh script to generate a Terraform config file for Global Traffic Management
 ```
 ./gtm.sh --user={username}
 ```
@@ -105,3 +105,19 @@ ansible-playbook -i ansible.inv start-app.yml
 ```
 scp {username}.tf workshop@filehost.connected-cloud.io:.
 ```
+## Integration with Akamai Services
+### Global Traffic Management
+The Terraform file generated on the last step of the workshop will be applied to an Akamai Demo config by the instructor. The file will generate a GTM property under the connectedcloud5.akadns.net domain, with the property name of {username}, and a GTM DNS name of {username}.connectedcloud5.akadns.net. This name will performance load balance each request, mapping users to the most proximate Compute region with no bias for even load distribution. 
+
+There are two default regions pre-built-
+* edgenative.connectedcloud5.akadns.net - uses all four of the workshop regions for distribution.
+* legacy.connectedcloud5.akadns.net - uses only one region to simulate a legacy, centralized origin.
+
+### Akamai Ion and WAF
+The workshop Akamaized URL is workshop.connected-cloud.io. For the API, Websocket, and Server-Sent Events components of the application, using the origin={username} query string will instruct Ion to use {username}.connectedcloud5.akadns.net as an origin. The HTML components of the application are stored in Object Storage.
+### Akamai EdgeWorkers
+The Get Quote service within the application uses Akamai EdgeWorkers to execute server-side javascript that calculates option value based on strike price and current price. The Edgeworker request is in the format of /quote?currentPrice=X&strikePrice=Y&optionType={call|put}
+
+For sake of comparision, the same service is running on the application surface at /quoteorigin. This call can be directed to a specific GTM origin as explained above via the origin={{username}|edgenative|legacy} query string argument.
+### Observability 
+The Ion Property has DataStream2 enabled, and sends complete CDN logs to Hydrolix TrafficPeak. When viewing dashboards in TrafficPeak, of particular interest is changes in Edge Turn-Around Time (measuring origin response latency) as requests switch from using distributed to centralized origins and back.
