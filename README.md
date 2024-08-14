@@ -46,7 +46,7 @@ cd edgenativeworkshop && ./install-tools.sh
 ```
 3. Add your linode API token to the Terraform variables file
 ```
-echo "linode_token  = {token} >> terraform.tfvars
+echo "linode_token  = {token}" >> terraform.tfvars
 ```
 4. Configure linode-cli and input your Linode API token
 ```
