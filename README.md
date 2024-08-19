@@ -78,7 +78,11 @@ terraform output ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' > ansible.inv
 ```
 ./nats_config.sh
 ```
-3. Use the included Ansible playbook to setup and start the NATS.io cluster
+3. Copy the keys to the cluster nodes
+```
+export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv copykeys.yml
+```
+4. Setup and run the NATS.io cluster
 ```
 export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml
 ```
@@ -88,11 +92,7 @@ export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-s
 ```
 ansible-playbook -i ansible.inv docker.yml
 ```
-2. Copy the keys to the cluster nodes
-```
-ansible-playbook -i ansible.inv copykeys.yml
-```
-3. Start the app layer in docker
+2. Start the app layer in docker
 ```
 ansible-playbook -i ansible.inv start-app.yml
 ```
