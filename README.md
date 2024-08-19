@@ -84,7 +84,7 @@ export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv copyke
 ```
 4. Setup and run the NATS.io cluster
 ```
-export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml
+ansible-playbook -i ansible.inv nats-setup.yml
 ```
 ### Install the Microservices layer 
 
