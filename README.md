@@ -105,6 +105,15 @@ ansible-playbook -i ansible.inv start-app.yml
 ```
 scp {username}.tf workshop@filehost.connected-cloud.io:.
 ```
+### Cleanup and destroy the environment after the workshop is done
+1. Delete the generated terraform file for GTM (this will collidate with the IAAS terraform state if not deleted)
+```
+rm {username}.tf
+```
+2. Use Terraform to delete the workshop virtual machines
+```
+terraform destroy
+```
 ## Integration with Akamai Services
 ### Global Traffic Management
 The Terraform file generated on the last step of the workshop will be applied to an Akamai Demo config by the instructor. The file will generate a GTM property under the connectedcloud5.akadns.net domain, with the property name of {username}, and a GTM DNS name of {username}.connectedcloud5.akadns.net. This name will performance load balance each request, mapping users to the most proximate Compute region with no bias for even load distribution. 
