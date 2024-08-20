@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     linode = {
-      source  = "linode/linode"
+      source = "linode/linode"
     }
   }
 }
@@ -16,6 +16,11 @@ variable "linode_token" {
   sensitive   = true
 }
 
+variable "userid" {
+  description = "User ID or identifier to be used in labels and tags"
+  type        = string
+}
+
 variable "ssh_public_key" {
   description = "Path to the SSH public key file"
   type        = string
@@ -27,8 +32,8 @@ variable "regions" {
   type        = list(string)
 }
 
-# Generate current Unix epoch time for timestamp
 locals {
+  # Generate current Unix epoch time for timestamp
   timestamp = formatdate("s", timestamp())
 }
 
@@ -43,11 +48,11 @@ locals {
 
 resource "linode_instance" "linode" {
   count       = length(var.regions)
-  label       = "workshop-${element(var.regions, count.index)}-${local.timestamp}"
+  label       = "${var.userid}-${element(var.regions, count.index)}-${local.timestamp}"
   region      = element(var.regions, count.index)
   type        = "g6-standard-1"
   image       = "linode/ubuntu24.04"
-  tags        = toset(["workshop"])
+  tags        = toset([var.userid])
   authorized_keys = [local.sanitized_ssh_key]
 }
 
