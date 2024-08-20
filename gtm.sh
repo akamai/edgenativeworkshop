@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Ensure the script is called with a --user argument
-if [ "$#" -ne 1 ] || ! [[ $1 =~ ^--user= ]]; then
-    echo "Usage: $0 --user=username"
+if [ "$#" -ne 1 ] || ! [[ $1 =~ ^--userid= ]]; then
+    echo "Usage: $0 --userid=username used early in workshop during terraform setup"
     exit 1
 fi
 
 # Extract the username from the --user argument
-user="${1#--user=}"
+userid="${1#--userid=}"
 
 LNINPUTFILE="linodejson"
-tag="workshop"
+tag="${userid}"
 LNOUTPATH="./linode-targets/*"
 LNOUT="./linode-targets/"
 LNPROC="./linode-processed/"
@@ -42,12 +42,12 @@ for file in $LNOUTPATH; do
 done
 
 # Build a GTM Property file based on entries 
-output_file="${user}.tf"
+output_file="${userid}.tf"
 
 cat > "$output_file" <<EOF
-resource "akamai_gtm_property" "${user}" {
+resource "akamai_gtm_property" "${userid}" {
   domain                      = akamai_gtm_domain.domain.name
-  name                        = "${user}"
+  name                        = "${userid}"
   type                        = "performance"
   ipv6                        = false
   score_aggregation_type      = "worst"
