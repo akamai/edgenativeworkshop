@@ -44,14 +44,14 @@ git init && git clone https://github.com/akamai/edgenativeworkshop
 ```
 cd edgenativeworkshop && ./install-tools.sh
 ```
-3. Add your linode API token and your username (any unique string, remember it for later) to the Terraform variables file
-```
-echo 'linode_token  = "{token}"' >> terraform.tfvars
-```
+3. Add your linode API token and your username (any unique string, remember it for later) to the Terraform variables file. The live workshop will walk through the steps to generate a Linode API Key.
 ```
 echo 'userid = "{userid}" >> terraform.tfvars
 ```
-4. Configure linode-cli and input your Linode API token
+```
+echo 'linode_token  = "{token}"' >> terraform.tfvars
+```
+4. Configure linode-cli and input your Linode API token. All other settings can be left as default
 ```
 linode-cli configure
 ```
