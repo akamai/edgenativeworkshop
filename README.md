@@ -21,16 +21,17 @@ The first step is to create a Linode using the "Secure Your Server" Marketplace 
 
 -   Limited sudo user
 -   Sudo password
--   Ssh key
+-   Select Disable Root SSH Login
 -   No Advanced options are required
 
 7. Select the Ubuntu 22.04 image type for Select an Image
-8. Select a Region.
+8. Select the Chicago Region.
 9. Select the Shared CPU 1GB "Nanode" plan.
 10. Enter a root password.
-11. Click Create Linode.
+11. Create Firewall with default policy of drop all inbound/allow all outbound traffic. 
+12. Click Create Linode.
 
-12. Once your Linode is running, login to it's shell (either using the web-based LISH console from Linode Cloud Manager, or via your SSH client of choice).
+13. Once your Linode is running, login as root to it's shell via the LISH console in Linode Cloud Manager, or via your SSH client of choice.
 
 ## Build your Edge Native Application 
 
