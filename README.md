@@ -109,7 +109,7 @@ ansible-playbook -i ansible.inv start-app.yml
 ### Generate Terraform Scripts for Akamai Global Traffic Management 
 1. Run the gtm.sh script to generate a Terraform config file for Global Traffic Management
 ```
-./gtm.sh --user={username}
+./gtm.sh --userid={username}
 ```
 2. Copy the terraform file to the filehost machine
 ```
