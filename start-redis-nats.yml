@@ -1,0 +1,19 @@
+---
+- name: Start Docker container
+  hosts: all
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: start redis-nats connector
+      docker_container:
+        name: redisnats
+        image: brianapley/redis-nats
+        pull: true
+        restart_policy: always
+        state: started
+        recreate: true
+        interactive: yes
+        etc_hosts:
+          host.docker.internal: 172.17.0.1
+        tty: yes
