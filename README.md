@@ -81,13 +81,9 @@ terraform output jp_osa_ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' > osaka
 ```
 ./nats_config.sh
 ```
-3. Copy the keys to the cluster nodes
+3. Setup and run the NATS.io cluster
 ```
-export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv copykeys.yml
-```
-4. Setup and run the NATS.io cluster
-```
-ansible-playbook -i ansible.inv nats-setup.yml
+export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv nats-setup.yml
 ```
 ### Install the Microservices layer 
 
