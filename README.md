@@ -92,6 +92,10 @@ export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ansible.inv copyke
 ```
 ansible-playbook -i ansible.inv nats-setup.yml
 ```
+5. Run the redis-nats connector in the Osaka compute region
+```
+ansible-playbook -i osaka.inv start-redis-nats.yml
+```
 ### Install the Microservices layer 
 
 1. Use the docker Ansible playbook to install Docker on the cluster nodes
