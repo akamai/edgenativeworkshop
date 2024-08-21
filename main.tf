@@ -63,3 +63,9 @@ output "linode_labels" {
 output "ip_address" {
   value = [for vm in linode_instance.linode : "${vm.ipv4}"]
 }
+
+output "jp_osa_ip_address" {
+  value = [for vm in linode_instance.linode : vm.ipv4 if vm.region == "jp-osa"]
+  description = "The IP address of the compute instance in the jp-osa region."
+}
+
