@@ -6,6 +6,18 @@
   vars:
     root_password: "{{ root_password }}"
   tasks:
+    - name: Copy pubkey
+      copy:
+        src: fullchain.pem  # Local path to new_nats.conf
+        dest: /etc/fullchain.pem 
+    - name: copy priv key 
+      copy:
+        src: privkey.pem  # Local path to new_nats.conf
+        dest: /etc/privkey.pem 
+    - name: set database directory 
+      command: mkdir /tmp/db
+    - name: set database directory permissions
+      command: chmod 777 /tmp/db
     - name: Copy nats config
       copy:
         src: new_nats.conf  # Local path to new_nats.conf
