@@ -73,9 +73,12 @@ scp workshop@filehost.connected-cloud.io:fullchain.pem .
 scp workshop@filehost.connected-cloud.io:privkey.pem .
 ```
 ### Use Ansible to install NATS.io and start your distributed NATS cluster
-1. Once the instances are created, use Terraform output to generate an ansible inventory file
+1. Once the instances are created, use Terraform output to generate ansible inventory files
 ```
 terraform output ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' > ansible.inv
+```
+```
+terraform output jp_osa_ip_address | sed -n 's/^.*"\([0-9.]*\)".*$/\1/p' > osaka.inv
 ```
 2. Run the included script to generate a nats config file based on the IP addresses of the hosts
 ```
