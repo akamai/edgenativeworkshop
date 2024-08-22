@@ -9,12 +9,11 @@
       aarch64: arm64
     ansible_user: root
   tasks:
-    - name: Update and upgrade all packages to the latest version
-      ansible.builtin.apt:
-        update_cache: true
-        upgrade: dist
-        cache_valid_time: 3600
-
+#    - name: Update and upgrade all packages to the latest version
+#      ansible.builtin.apt:
+#        update_cache: true
+#        upgrade: dist
+#        cache_valid_time: 3600
     - name: Install required packages
       ansible.builtin.apt:
         pkg:
@@ -36,9 +35,9 @@
         keyring: /etc/apt/keyrings/docker.gpg
         state: present
 
-    - name: Print architecture variables
-      ansible.builtin.debug:
-        msg: "Architecture: {{ ansible_architecture }}, Codename: {{ ansible_lsb.codename }}"
+#    - name: Print architecture variables
+#      ansible.builtin.debug:
+#        msg: "Architecture: {{ ansible_architecture }}, Codename: {{ ansible_lsb.codename }}"
 
     - name: Add Docker repository
       ansible.builtin.apt_repository:
