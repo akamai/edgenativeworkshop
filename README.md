@@ -2,6 +2,10 @@
 
 ![image](https://github.com/user-attachments/assets/8824f9a9-89fb-46ed-9b20-a44b002d3ad8)
 
+This workshop builds an edge-native, distributed application that runs an Options Trading game described here - https://github.com/ccie7599/edge-trader
+
+The exercise demonstrates a use case of running both stateless/stateful services and applications, across distributed ephemeral nodes, with the source-of-truth for the game similarly distributed across each node. 
+
 ## Build your Secure Shell Linode
 
 The first step is to create a Linode using the "Secure Your Server" Marketplace image. This will give us a hardened, consistent environment to run our subsequent commands from.
