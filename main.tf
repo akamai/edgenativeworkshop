@@ -50,7 +50,7 @@ resource "linode_instance" "linode" {
   count       = length(var.regions)
   label       = "${var.userid}-${element(var.regions, count.index)}-${local.timestamp}"
   region      = element(var.regions, count.index)
-  type        = "g6-standard-1"
+  type        = "g6-standard-4"
   image       = "linode/ubuntu24.04"
   tags        = toset([var.userid])
   authorized_keys = [local.sanitized_ssh_key]
