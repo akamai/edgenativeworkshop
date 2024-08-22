@@ -47,7 +47,7 @@ cd edgenativeworkshop && ./install-tools.sh
 ```
 3. Add your linode API token and your username (any unique string, remember it for later) to the Terraform variables file. The live workshop will walk through the steps to generate a Linode API Key.
 ```
-echo 'userid = "{userid}" >> terraform.tfvars
+echo 'userid = "{userid}"' >> terraform.tfvars
 ```
 ```
 echo 'linode_token  = "{token}"' >> terraform.tfvars
