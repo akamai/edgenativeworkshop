@@ -13,7 +13,7 @@ sudo apt-get update && sudo apt-get install -y terraform
 # install pip 
 sudo apt-get install -y python3-pip
 # Install Linode CLI
-pip3 install linode-cli --upgrade
+pip3 install linode-cli --upgrade --break-system-packages
 
 # Install Ansible
 sudo apt-get update
