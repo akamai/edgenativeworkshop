@@ -6,6 +6,16 @@ This workshop builds an edge-native, distributed application that runs an Option
 
 The exercise demonstrates a use case of running both stateless/stateful services and applications, across distributed ephemeral nodes, with the source-of-truth for the game similarly distributed across each node. 
 
+By embracing edge-native concepts, this exercise features the following benefits-
+
+* Performance - since application and NATS.io nodes can be deployed anywhere, we are using Akamai Connected Cloud as our infrastructure, with single-digit millisecond latency to the CDN front-door of the application.
+
+* Scale - game nodes can be horizontially scaled, and will automatically converge around node changes and node adds/deletes.
+
+* Reliability - each node has a 99.9% base uptime SLA, and the game can withstand multiple node failures while still maintaining uptime.
+
+* Security - all user-facing services are accessed through Akamai's security layer, and ohter security features protect the infrastructure. 
+
 ## Build your Secure Shell Linode
 
 The first step is to create a Linode using the "Secure Your Server" Marketplace image. This will give us a hardened, consistent environment to run our subsequent commands from.
